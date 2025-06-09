@@ -178,15 +178,13 @@ body {
 /* button styles */
 .button,
 .button:visited {
-    display: grid;
-    grid-template-columns: auto;
-    gap: 10px;
+    padding: 5px 5px;
     align-items: center;
+    justify-content: center;
     border: none;
     text-decoration: none;
     background: var(--button-background);
-    padding: 10px 10px;
-    border-radius: 17px;
+    border-radius: 20px;
     font-family: inherit;
     font-size: inherit;
     cursor: pointer;
@@ -196,16 +194,24 @@ body {
     backdrop-filter: blur(5px);
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    min-width: fit-content;
 }
 
 .button.scrolled {
+    display: grid;
     grid-template-columns: auto 1fr;
     gap: 10px;
+    min-width: none;
+    min-height: none;
+    padding: 10px 10px;
+    border-radius: 17px;
 }
 
 .button img {
+    display: block;
+    margin: 0 auto;
     border-radius: 20px;
-    width: auto;
+    width: 70px;
     height: 70px;
     transition: margin-left 0.2s ease;
 }
@@ -251,9 +257,14 @@ body {
     display: flex;
     gap: 10px;
     height: fit-content;
-    flex-wrap: wrap;
     margin-top: 15px;
     margin-bottom: 40px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.social-section::-webkit-scrollbar {
+    display: none;
 }
 
 .social-section.scrolled {
@@ -282,7 +293,7 @@ body {
     padding-top: 0px;
     border-radius: 35px 35px 0 0;
     margin-top: calc(100vh - 370px);
-    transition-property: background, box-shadow;
+    transition-property: background, box-shadow, margin-top;
     transition-duration: 0.1s;
     transition-timing-function: ease;
     transition-behavior: smooth;
@@ -334,18 +345,20 @@ body {
     padding: 10px 30px;
     border-radius: 17px;
     backdrop-filter: blur(10px);
-    text-align: justify;
-    transition: padding 0.3s ease, text-align 0.3s ease, background 0.3s ease;
+    transition: padding 0.3s ease, text-align 0.3s ease, background 0.3s ease, max-height 0.3s ease;
     margin-top: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-height: 260px;
+    overflow: hidden;
 }
 
 .header-section.scrolled {
     background: rgba(0, 0, 0, 0);
     backdrop-filter: none;
     padding: 5px 0px;
-    text-align: left;
     box-shadow: none;
+    text-align: justify;
+    max-height: none;
 }
 
 .blur-overshoot.animate-in {
@@ -354,6 +367,14 @@ body {
 
 .blur-overshoot.animate-out {
     animation: blur-overshoot-out 0.25s;
+}
+
+.about-me {
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+.about-me.scrolled {
+    mask-image: none;
 }
 
 /* animation keyframes */
@@ -397,6 +418,7 @@ body {
         padding: 10px 20px;
         bottom: 0;
         height: 50%;
+        transition: height 0.3s ease;
     }
 
     .matchatab.images-container {
@@ -413,9 +435,48 @@ body {
 
     .matchatab.description img {
         position: absolute;
-        top: -70px;
+        top: -90px;
         right: 10px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         border-radius: 32px;
+        transition: all 0.3s ease;
+    }
+
+    .header-section {
+        padding: 10px 15px;
+    }
+
+    .header-section.scrolled {
+        text-align: left;
+    }
+}
+
+@media(max-width: 500px) {
+    .outer-container {
+        margin-top: calc(100vh - 400px);
+    }
+}
+
+@media(max-width: 410px) {
+    .outer-container {
+        width: 90vw;
+        margin-top: calc(100vh - 430px);
+        padding: 5px;
+        padding-top: 0px;
+    }
+
+    .outer-container.scrolled {
+        padding: 15px;
+        padding-top: 0px;
+    }
+
+    .matchatab.description {
+        height: 70%;
+    }
+
+    .matchatab.description img {
+        top: -70px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.7);
     }
 }

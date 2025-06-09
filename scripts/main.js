@@ -48,6 +48,7 @@ const blur_overshoot = document.querySelectorAll('.blur-overshoot');
 const buttons = document.querySelectorAll('.button');
 const social_section = document.querySelector('.social-section');
 const scroll_up_text = document.getElementById('scroll-up-text');
+const about_me = document.querySelector('.about-me')
 
 window.addEventListener('scroll', () => {
   if (window.scrollY > 0) {
@@ -55,6 +56,7 @@ window.addEventListener('scroll', () => {
     outer_container.classList.add('scrolled');
     social_section.classList.add('scrolled');
     scroll_up_text.classList.add('scrolled');
+    about_me.classList.add('scrolled');
 
     buttons.forEach(e1 => {
       e1.classList.add('scrolled');
@@ -74,6 +76,7 @@ window.addEventListener('scroll', () => {
     outer_container.classList.remove('scrolled');
     social_section.classList.remove('scrolled');
     scroll_up_text.classList.remove('scrolled');
+    about_me.classList.remove('scrolled');
 
     buttons.forEach(e1 => {
       e1.classList.remove('scrolled');
