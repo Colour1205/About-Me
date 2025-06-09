@@ -6,9 +6,17 @@ body {
     overflow-x: hidden;
 }
 
-/* background */
+/* variables */
+:root {
+    --background-image: url("../assets/images/background-1.jpg");
+    --font-color: white;
+    --font-color-alt: black;
+    --button-background: rgba(255, 255, 255, 0.6);
+    --font-weight: normal;
+}
+
 .background {
-    background-image: url("../assets/images/background-1.jpg");
+    background-image: var(--background-image);
     z-index: -1;
     background-repeat: no-repeat;
     position: fixed;
@@ -100,68 +108,112 @@ body {
     backdrop-filter: blur(10px);
 }
 
+#matchatab-model {
+    
+}
+
 /* button styles */
 .button,
 .button:visited {
-    display: inline-flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: auto;
+    gap: 10px;
     align-items: center;
     border: none;
     text-decoration: none;
-    color: white;
-    background: rgba(0, 0, 0, 0.637);
-    padding: 10px 20px;
-    border-radius: 10px;
-    width: 100px;
-    min-width: 100px;
-    max-width: 100px;
-    height: 100px;
-    min-height: 100px;
-    max-height: 100px;
+    background: var(--button-background);
+    padding: 10px 10px;
+    border-radius: 17px;
     font-family: inherit;
     font-size: inherit;
     cursor: pointer;
     box-sizing: border-box;
-    transition: background 0.2s;
+    transition: all 0.2s ease, color 0.3s ease;
+    color: var(--font-color-alt);
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+.button.scrolled {
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+}
+
+.button img {
+    border-radius: 20px;
+    width: auto;
+    height: 70px;
+    transition: margin-left 0.2s ease;
+}
+
+.button.scrolled img {
+    margin-left: 5px;
+}
+
+.button span {
+    text-align: center;
+    display: none;
+}
+
+.button.scrolled span {
+    display: block;
+}
 
 /* social section */
 .social-section {
     display: flex;
-    flex-wrap: wrap;
-    overflow: auto;
     gap: 10px;
-    margin-top: 20px;
     height: fit-content;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    margin-bottom: 60px;
+}
+
+.social-section.scrolled {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    grid-auto-rows: 100px;
 }
 
 /* quick link section */
 .quick-link-section {
-    display: flex;
-    flex-wrap: wrap;
-    overflow: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    grid-auto-rows: 100px;
     gap: 10px;
-    margin-top: 20px;
     height: fit-content;
+    margin-top: 30px;
+    margin-bottom: 40px;
 }
 
 .outer-container {
-    max-width: 500px;
+    max-width: 550px;
     width: 80vw;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(10px);
     padding: 30px;
+    padding-top: 0px;
     border-radius: 35px 35px 0 0;
-    margin-top: calc(100vh - 280px);
-    background: #2e32361f;
+    margin-top: calc(100vh - 370px);
+    transition-property: background, box-shadow;
+    transition-duration: 0.1s;
+    transition-timing-function: ease;
+    transition-behavior: smooth;
+    position: relative;
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: none;
+}
+
+.outer-container.scrolled {
+    background: rgba(255, 255, 255, 0.6);
     box-shadow: 0 0 20px rgba(38, 38, 38, 0.818);
+    backdrop-filter: blur(30px);
 }
 
 #scroll-up-text {
     position: absolute;
-    top: -70px;
+    top: -40px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -169,8 +221,81 @@ body {
     justify-content: center;
     align-items: center;
     color: white;
+    transition: filter 0.5s, top 0.2s;
+}
+
+#scroll-up-text.scrolled {
+    filter: blur(10px);
+    top: -100px;
 }
 
 #scroll-up-text svg {
     fill: white;
+}
+
+.font-color {
+    color: var(--font-color);
+    transition: color 0.3s ease;
+}
+
+.font-weight {
+    font-weight: var(--font-weight);
+}
+
+/* header section */
+.header-section {
+    background: rgba(0, 0, 0, 0.497);
+    padding: 10px 30px;
+    border-radius: 17px;
+    backdrop-filter: blur(10px);
+    text-align: justify;
+    transition: padding 0.3s ease, text-align 0.3s ease, background 0.3s ease;
+    margin-top: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.header-section.scrolled {
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: none;
+    padding: 5px 0px;
+    text-align: left;
+    box-shadow: none;
+}
+
+.blur-overshoot.animate-in {
+    animation: blur-overshoot-in 0.25s;
+}
+
+.blur-overshoot.animate-out {
+    animation: blur-overshoot-out 0.25s;
+}
+
+/* animation keyframes */
+
+@keyframes blur-overshoot-in {
+    0% {
+        filter: blur(0px);
+    }
+
+    50% {
+        filter: blur(3px);
+    }
+
+    100% {
+        filter: blur(0px);
+    }
+}
+
+@keyframes blur-overshoot-out {
+    0% {
+        filter: blur(0px);
+    }
+
+    50% {
+        filter: blur(2px);
+    }
+
+    100% {
+        filter: blur(0px);
+    }
 }
