@@ -108,8 +108,31 @@ body {
     backdrop-filter: blur(10px);
 }
 
-#matchatab-model {
-    
+#matchatab-modal {
+    width: 80vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(50px);
+    background: rbga(255, 255, 255, 0.6);
+    position: relative;
+}
+
+
+.matchatab.images-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    position: relative;
+    overflow: auto;
+    gap: 10px;
+    padding: 20px;
+}
+
+.matchatab.images-container img {
+    width: auto;
+    height: 300px;
+    border-radius: 20px;
 }
 
 /* button styles */
@@ -160,6 +183,29 @@ body {
     display: block;
 }
 
+/* buttonv2 styles */
+.buttonv2,
+.buttonv2:visited {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    text-decoration: none;
+    padding: 10px 10px;
+    border-radius: 17px;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all 0.2s ease, color 0.3s ease;
+    color: white;
+    background: rgba(0, 0, 0, 0.757);
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+    width: fit-content;
+    padding: 10px 50px;
+}
+
 /* social section */
 .social-section {
     display: flex;
@@ -167,7 +213,7 @@ body {
     height: fit-content;
     flex-wrap: wrap;
     margin-top: 15px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 .social-section.scrolled {
