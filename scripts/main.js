@@ -93,3 +93,5 @@ window.addEventListener('scroll', () => {
     document.documentElement.style.setProperty('--font-weight', 'normal');
   }
 });
+
+
