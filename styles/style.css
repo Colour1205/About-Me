@@ -400,13 +400,26 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     scrollbar-width: none;
-    backdrop-filter: blur(10px);
-    mask-image:
-        linear-gradient(180deg, rgba(0, 0, 0, 1) 85%, transparent 100%),
-        linear-gradient(to left, black 90%, transparent 100%),
-        linear-gradient(to right, black 95%, transparent 100%),
-        linear-gradient(to top, black 95%, transparent 100%);
-    mask-composite: intersect;
+}
+
+@supports (mask-image: linear-gradient(black, transparent), linear-gradient(black, transparent)) {
+    .widget-container {
+        mask-image:
+            linear-gradient(to bottom, black 90%, transparent 100%),
+            linear-gradient(to left, black 90%, transparent 100%),
+            linear-gradient(to right, black 95%, transparent 100%),
+            linear-gradient(to top, black 95%, transparent 100%);
+        mask-composite: intersect;
+        backdrop-filter: blur(10px);
+    }
+
+    .widget-container.scrolled {
+        filter: blur(10px);
+    }
+
+    .stock.card {
+        backdrop-filter: none;
+    }
 }
 
 .widget-container::-webkit-scrollbar {
@@ -445,6 +458,7 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 .stock-ticker {
@@ -554,6 +568,10 @@ body {
     .header-section.scrolled {
         text-align: justify;
     }
+
+    .widget-container {
+        display: none;
+    }
 }
 
 @media(max-width: 500px) {
@@ -561,15 +579,6 @@ body {
         margin-top: calc(100vh - 400px);
     }
 
-    .widget-container {
-        bottom: 390px;
-    }
-}
-
-@media(max-width: 480px) {
-    .widget-container {
-        display: none;
-    }
 }
 
 @media(max-width: 410px) {
@@ -579,7 +588,7 @@ body {
         padding: 5px;
         padding-top: 0px;
     }
-    
+
     .outer-container.scrolled {
         padding: 15px;
         padding-top: 0px;
