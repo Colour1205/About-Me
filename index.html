@@ -11,6 +11,9 @@
 
 <body>
     <div class="background"></div>
+    <div class="widget-container">
+        <div class="stock-section" id="stock-section"></div>
+    </div>
     <div class="outer-container">
         <p id="scroll-up-text">
             <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -19,12 +22,23 @@
             </svg>
             scroll up
         </p>
+        <button class="buttonv3" id="back-button">
+            <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="Menu / Close_MD">
+                    <path id="Vector" d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18" stroke="#000000" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+            </svg>
+        </button>
         <div class="header-section font-color blur-overshoot">
             <h1 class="title">Hi!</h1>
-            <p class="about-me font-weight">I am first year Computer Science student at the University of
-                Toronto with skills in
-                Python, Java, HTML/CSS/JS. I am experienced in coding competitions, video production, and collaborative
-                projects. I am passionate about software development, AI, and content creation.</p>
+            <p class="about-me font-weight">I'm a first-year Computer Science student at the University of Toronto
+                with
+                experience in Python, Java, HTML, CSS, and JavaScript. I enjoy building creative projects, exploring
+                AI,
+                making videos, practicing photography, and spending time with my cat. Feel free to explore my
+                website!
+            </p>
         </div>
         <div class="social-section" id="auto-scroll-social">
             <a href="https://www.github.com/Colour1205/" class="button">
@@ -64,7 +78,9 @@
                 <p style="font-weight: normal">
                     GPA: 3.95/4.0<br>
                     Majoring in Computer Science and Economics<br>
-                    Relevant course work: Linear Algebra, Mathematical Proof, Object-Oriented Programming, Statistics, Economics
+                    Relevant course work: Linear Algebra, Mathematical Proof, Object-Oriented Programming,
+                    Statistics,
+                    Economics
                 </p>
             </div>
             <div class="education-card">
@@ -75,10 +91,12 @@
         </div>
     </div>
 
+    <!-- modal section -->
+
     <div class="modal-container">
         <div class="modal" id="wechat-modal">
             <img src="assets/images/wechat.png" alt="Scan using Wechat" />
-            <button class="modal-close-button">
+            <button class="modal-close-button buttonv3">
                 <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Menu / Close_MD">
                         <path id="Vector" d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18" stroke="#000000"
@@ -92,7 +110,7 @@
         <div class="modal" id="email-modal">
             <h2>Email</h2>
             <p>chuck.cheng@uaena.io</p>
-            <button class="modal-close-button">
+            <button class="modal-close-button buttonv3">
                 <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Menu / Close_MD">
                         <path id="Vector" d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18" stroke="#000000"
@@ -113,14 +131,17 @@
                 <h2>MatchaTab</h2>
                 <p>
                     MatchaTab is a browser new tab homepage featuring a modern acrylic design. It provides real-time
-                    stock information, news, customizable quick links, direct ChatGPT search, and the ability to change
-                    your wallpaper. The layout is fully responsive, ensuring a seamless experience on any screen size.
-                    Currently, Bing is the only supported search engine. MatchaTab is still in alpha, and more features
+                    stock information, news, customizable quick links, direct ChatGPT search, and the ability to
+                    change
+                    your wallpaper. The layout is fully responsive, ensuring a seamless experience on any screen
+                    size.
+                    Currently, Bing is the only supported search engine. MatchaTab is still in alpha, and more
+                    features
                     will be added soon.
                 </p>
                 <a href="https://www.matchatab.com" class="matchatab buttonv2">view</a>
             </div>
-            <button class="modal-close-button">
+            <button class="modal-close-button buttonv3">
                 <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Menu / Close_MD">
                         <path id="Vector" d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18" stroke="#000000"
@@ -130,6 +151,7 @@
             </button>
         </div>
     </div>
+
 
     <script src="scripts/main.js"></script>
 </body>

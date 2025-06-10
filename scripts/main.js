@@ -41,6 +41,16 @@ document.querySelectorAll('.modal-close-button').forEach(closeButton => {
   });
 });
 
+// back button logic
+const back_button = document.getElementById('back-button');
+back_button.addEventListener('click', () => {
+  // Scroll to the top of the page
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
 /* --- outer container background scroll logic --- */
 const outer_container = document.querySelector('.outer-container');
 const header_section = document.querySelector('.header-section');
@@ -49,6 +59,7 @@ const buttons = document.querySelectorAll('.button');
 const social_section = document.querySelector('.social-section');
 const scroll_up_text = document.getElementById('scroll-up-text');
 const about_me = document.querySelector('.about-me')
+const widget_container = document.querySelector('.widget-container');
 
 window.addEventListener('scroll', () => {
   if (window.scrollY > 0) {
@@ -57,6 +68,8 @@ window.addEventListener('scroll', () => {
     social_section.classList.add('scrolled');
     scroll_up_text.classList.add('scrolled');
     about_me.classList.add('scrolled');
+    widget_container.classList.add('scrolled');
+    back_button.classList.add('scrolled');
 
     buttons.forEach(e1 => {
       e1.classList.add('scrolled');
@@ -69,7 +82,7 @@ window.addEventListener('scroll', () => {
 
     document.documentElement.style.setProperty('--font-color', 'black');
     document.documentElement.style.setProperty('--font-color-alt', 'white');
-    document.documentElement.style.setProperty('--button-background', 'rgba(0, 0, 0, 0.76)');
+    document.documentElement.style.setProperty('--button-background', 'rgba(0, 0, 0, 0.65)');
     document.documentElement.style.setProperty('--font-weight', 'bold');
   } else {
     header_section.classList.remove('scrolled');
@@ -77,6 +90,8 @@ window.addEventListener('scroll', () => {
     social_section.classList.remove('scrolled');
     scroll_up_text.classList.remove('scrolled');
     about_me.classList.remove('scrolled');
+    widget_container.classList.remove('scrolled');
+    back_button.classList.remove('scrolled');
 
     buttons.forEach(e1 => {
       e1.classList.remove('scrolled');
@@ -89,9 +104,81 @@ window.addEventListener('scroll', () => {
 
     document.documentElement.style.setProperty('--font-color', 'white');
     document.documentElement.style.setProperty('--font-color-alt', 'black');
-    document.documentElement.style.setProperty('--button-background', 'rgba(255, 255, 255, 0.6)');
+    document.documentElement.style.setProperty('--button-background', 'rgba(255, 255, 255, 0.5)');
     document.documentElement.style.setProperty('--font-weight', 'normal');
   }
 });
 
 
+/* --- stock widget logic --- */
+const STOCK_SYMBOLS = [
+  { symbol: 'AAPL', elemId: 'stock-aapl', label: 'AAPL' },
+  { symbol: 'TSLA', elemId: 'stock-tsla', label: 'TSLA' },
+  { symbol: 'SPY', elemId: 'stock-spy', label: 'S&P 500' },
+  { symbol: 'GOOGL', elemId: 'stock-googl', label: 'GOOGL' },
+  { symbol: 'NVDA', elemId: 'stock-nvda', label: 'NVDA' },
+  { symbol: 'META', elemId: 'stock-meta', label: 'META' },
+  { symbol: 'btc-usd', elemId: 'stock-btc', label: 'BTC/USD' },
+];
+
+document.addEventListener("DOMContentLoaded", function () {
+  const stockSection = document.getElementById('stock-section');
+  if (!stockSection) return;
+
+  STOCK_SYMBOLS.forEach(stock => {
+    const card = document.createElement('div');
+    card.className = 'stock card';
+    card.id = stock.elemId;
+
+    card.innerHTML = `
+      <div class="stock-ticker">${stock.label}</div>
+      <div class="stock-price"-</div>
+    `;
+    stockSection.appendChild(card);
+  });
+
+  updateStockPricesYahoo(); // initial fetch after DOM load
+});
+
+// Helper function to fetch price from Yahoo Finance
+async function fetchYahooQuote(symbol) {
+  try {
+    const url = `https://yahoo-proxy-colour1205s-projects.vercel.app/api/yahoo?symbol=${symbol}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    // Defensive checks for data
+    if (!data.chart || !data.chart.result || !data.chart.result[0]) return null;
+    const meta = data.chart.result[0].meta;
+    // Try to use regularMarketPrice or previousClose as fallback
+    let price = meta.regularMarketPrice ?? meta.previousClose ?? null;
+    let prevClose = meta.previousClose ?? null;
+    if (price == null || prevClose == null) return null;
+    // Calculate percent change
+    const percentChange = prevClose ? ((price - prevClose) / prevClose) * 100 : 0;
+    return { price, percentChange };
+  } catch {
+    return null;
+  }
+}
+
+// Update all stock cards with latest prices from Yahoo
+async function updateStockPricesYahoo() {
+  for (const { symbol, elemId } of STOCK_SYMBOLS) {
+    const priceElem = document.querySelector(`#${elemId} .stock-price`);
+    try {
+      const result = await fetchYahooQuote(symbol);
+      if (result) {
+        const { price, percentChange } = result;
+        let color = percentChange > 0 ? "#3E9D45" : percentChange < 0 ? "#CA5C5C" : "#444";
+        let sign = percentChange > 0 ? "+" : "";
+        priceElem.innerHTML = `<span style="color:${color};">${price.toFixed(2)} <small>(${sign}${percentChange.toFixed(2)}%)</small></span>`;
+      } else {
+        priceElem.textContent = "—";
+      }
+    } catch {
+      priceElem.textContent = "—";
+    }
+  }
+}
+
+setInterval(updateStockPricesYahoo, 60000);

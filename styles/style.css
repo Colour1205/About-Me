@@ -8,10 +8,10 @@ body {
 
 /* variables */
 :root {
-    --background-image: url("../assets/images/background-1.jpg");
+    --background-image: url("../assets/images/background-2.jpg");
     --font-color: white;
     --font-color-alt: black;
-    --button-background: rgba(255, 255, 255, 0.6);
+    --button-background: rgba(255, 255, 255, 0.5);
     --font-weight: normal;
 }
 
@@ -67,34 +67,12 @@ body {
     backdrop-filter: blur(10px);
 }
 
-.modal-close-button {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    height: 40px;
-    width: 40px;
-    padding: 7px;
-    border-radius: 50%;
-    background: rgb(221, 221, 221);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-    border: none;
-    transition: all 0.2s ease;
-    cursor: pointer;
-}
-
-.modal-close-button:hover {
-    background: rgba(160, 160, 160, 0.5);
-}
-
-.modal-close-button:focus {
-    background: rgba(78, 78, 78, 0.5);
-}
-
 /* individual modal styles */
 
 #wechat-modal img {
-    width: auto;
-    height: 550px;
+    width: 95vw;
+    max-width: 400px;
+    height: auto;
 }
 
 #wechat-modal {
@@ -107,7 +85,9 @@ body {
 
 #matchatab-modal {
     width: 80vw;
+    max-width: 900px;
     height: 80vh;
+    max-height: 550px;
     display: flex;
     flex-direction: row;
 }
@@ -191,7 +171,7 @@ body {
     box-sizing: border-box;
     transition: all 0.2s ease, color 0.3s ease;
     color: var(--font-color-alt);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(20px);
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     min-width: fit-content;
@@ -252,6 +232,30 @@ body {
     padding: 10px 50px;
 }
 
+
+.buttonv3 {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    height: 40px;
+    width: 40px;
+    padding: 7px;
+    border-radius: 50%;
+    background: rgb(221, 221, 221);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    border: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.buttonv3:hover {
+    background: rgba(160, 160, 160, 0.5);
+}
+
+.buttonv3:focus {
+    background: rgba(78, 78, 78, 0.5);
+}
+
 /* social section */
 .social-section {
     display: flex;
@@ -284,6 +288,17 @@ body {
     margin-bottom: 40px;
 }
 
+#back-button {
+    opacity: 0;
+    margin: 5px;
+    transition: all 0s 0s;
+}
+
+#back-button.scrolled {
+    opacity: 1;
+    transition: all 0.5s 0.3s;
+}
+
 .outer-container {
     max-width: 550px;
     width: 80vw;
@@ -296,16 +311,15 @@ body {
     transition-property: background, box-shadow, margin-top;
     transition-duration: 0.1s;
     transition-timing-function: ease;
-    transition-behavior: smooth;
     position: relative;
     background: rgba(0, 0, 0, 0);
     backdrop-filter: none;
 }
 
 .outer-container.scrolled {
-    background: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 0 20px rgba(38, 38, 38, 0.818);
-    backdrop-filter: blur(30px);
+    background: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 50px rgba(149, 149, 149, 0.518);
+    backdrop-filter: blur(10px) brightness(1.3) contrast(0.85);
 }
 
 #scroll-up-text {
@@ -328,6 +342,7 @@ body {
 
 #scroll-up-text svg {
     fill: white;
+    animation: inf-bounce 4s infinite;
 }
 
 .font-color {
@@ -369,12 +384,85 @@ body {
     animation: blur-overshoot-out 0.25s;
 }
 
-.about-me {
-    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+/* widget section */
+.widget-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    right: 0;
+    top: 0;
+    max-width: 500px;
+    width: fit-content;
+    padding: 20px;
+    transition: all 0.3s ease;
+    bottom: 360px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    backdrop-filter: blur(10px);
+    mask-image:
+        linear-gradient(180deg, rgba(0, 0, 0, 1) 85%, transparent 100%),
+        linear-gradient(to left, black 90%, transparent 100%),
+        linear-gradient(to right, black 95%, transparent 100%),
+        linear-gradient(to top, black 95%, transparent 100%);
+    mask-composite: intersect;
 }
 
-.about-me.scrolled {
-    mask-image: none;
+.widget-container::-webkit-scrollbar {
+    display: none;
+}
+
+.widget-container.scrolled {
+    transform: scale(0.95);
+    filter: blur(5px);
+}
+
+/* global card styles */
+.card {
+    background: rgba(0, 0, 0, 0.497);
+    transition: box-shadow 0.18s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    font-family: inherit;
+    font-weight: 500;
+    border-radius: 16px;
+}
+
+/* stock section */
+.stock-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: right;
+    position: relative;
+}
+
+.stock.card {
+    height: 100px;
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.stock-ticker {
+    position: relative;
+    font-size: 1.04rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ffffffda;
+    margin-bottom: 7px;
+}
+
+.stock-price {
+    position: relative;
+    font-size: 1.13rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-wrap: wrap;
+    text-align: center;
 }
 
 /* animation keyframes */
@@ -407,7 +495,24 @@ body {
     }
 }
 
+@keyframes inf-bounce {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-13px) scale(1.2);
+        filter: blur(1px);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+
 /* responsive styles */
+
 @media(max-width: 620px) {
     #matchatab-modal {
         flex-direction: column;
@@ -447,13 +552,31 @@ body {
     }
 
     .header-section.scrolled {
-        text-align: left;
+        text-align: justify;
     }
 }
 
 @media(max-width: 500px) {
     .outer-container {
         margin-top: calc(100vh - 400px);
+    }
+
+    .widget-container {
+        bottom: 390px;
+    }
+}
+
+@media(max-width: 480px) {
+    .stock-section {
+        justify-content: center;
+    }
+
+    .widget-container.scrolled {
+        mask-image:
+            linear-gradient(to bottom, black 95%, transparent 100%),
+            linear-gradient(to left, black 90%, transparent 100%),
+            linear-gradient(to right, black 90%, transparent 100%),
+            linear-gradient(to top, black 95%, transparent 100%);
     }
 }
 
@@ -465,13 +588,23 @@ body {
         padding-top: 0px;
     }
 
+    .widget-container {
+        bottom: 420px;
+    }
+
     .outer-container.scrolled {
         padding: 15px;
         padding-top: 0px;
     }
 
+    #matchatab-modal {
+        width: 95vw;
+        align-items: center;
+    }
+
     .matchatab.description {
         height: 70%;
+        width: calc(100% - 60px);
     }
 
     .matchatab.description img {
@@ -479,5 +612,13 @@ body {
         left: 50%;
         transform: translateX(-50%) scale(0.7);
     }
-}
 
+    .about-me {
+        mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    }
+
+    .about-me.scrolled {
+        mask-image: none;
+    }
+
+}
