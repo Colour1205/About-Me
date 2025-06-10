@@ -567,16 +567,8 @@ body {
 }
 
 @media(max-width: 480px) {
-    .stock-section {
-        justify-content: center;
-    }
-
-    .widget-container.scrolled {
-        mask-image:
-            linear-gradient(to bottom, black 95%, transparent 100%),
-            linear-gradient(to left, black 90%, transparent 100%),
-            linear-gradient(to right, black 90%, transparent 100%),
-            linear-gradient(to top, black 95%, transparent 100%);
+    .widget-container {
+        display: none;
     }
 }
 
