@@ -3,7 +3,6 @@ body {
     font-family: 'saira', sans-serif;
     justify-content: center;
     display: flex;
-    overflow-x: hidden;
 }
 
 /* variables */
@@ -314,6 +313,7 @@ body {
     position: relative;
     background: rgba(0, 0, 0, 0);
     backdrop-filter: none;
+
 }
 
 .outer-container.scrolled {
@@ -321,6 +321,15 @@ body {
     box-shadow: 0 0 50px rgba(149, 149, 149, 0.518);
     backdrop-filter: blur(10px) brightness(1.3) contrast(0.85);
 }
+
+.off-screen-section {
+    display: none;
+}
+
+.off-screen-section.scrolled {
+    display: block;
+}
+
 
 #scroll-up-text {
     position: absolute;
@@ -389,18 +398,28 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed;
-    right: 0;
+    position: relative;
     top: 0;
+    width: auto;
     max-width: 500px;
-    width: fit-content;
-    padding: 20px;
+    padding: 30px;
     transition: all 0.3s ease;
-    bottom: 360px;
-    overflow-y: auto;
-    overflow-x: hidden;
     scrollbar-width: none;
 }
+
+.widget-scroll-container {
+    max-height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+    overscroll-behavior: contain;
+    position: sticky;
+    top: 0;
+}
+
+.widget-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
 
 @supports (mask-image: linear-gradient(black, transparent), linear-gradient(black, transparent)) {
     .widget-container {
@@ -446,8 +465,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: right;
     position: relative;
+    justify-content: right;
 }
 
 .stock.card {
@@ -527,6 +546,12 @@ body {
 
 /* responsive styles */
 
+@media(max-width: 852px) {
+    .widget-container {
+        display: none;
+    }
+}
+
 @media(max-width: 620px) {
     #matchatab-modal {
         flex-direction: column;
@@ -567,10 +592,6 @@ body {
 
     .header-section.scrolled {
         text-align: justify;
-    }
-
-    .widget-container {
-        display: none;
     }
 }
 

@@ -60,6 +60,7 @@ const social_section = document.querySelector('.social-section');
 const scroll_up_text = document.getElementById('scroll-up-text');
 const about_me = document.querySelector('.about-me')
 const widget_container = document.querySelector('.widget-container');
+const off_screen_section = document.querySelector('.off-screen-section');
 
 window.addEventListener('scroll', () => {
   if (window.scrollY > 0) {
@@ -70,6 +71,7 @@ window.addEventListener('scroll', () => {
     about_me.classList.add('scrolled');
     widget_container.classList.add('scrolled');
     back_button.classList.add('scrolled');
+    off_screen_section.classList.add('scrolled');
 
     buttons.forEach(e1 => {
       e1.classList.add('scrolled');
@@ -92,6 +94,7 @@ window.addEventListener('scroll', () => {
     about_me.classList.remove('scrolled');
     widget_container.classList.remove('scrolled');
     back_button.classList.remove('scrolled');
+    off_screen_section.classList.remove('scrolled');
 
     buttons.forEach(e1 => {
       e1.classList.remove('scrolled');
