@@ -214,3 +214,4 @@ widget_close_button.addEventListener('click', () => {
   const widget_container = document.querySelector('.widget-container');
   widget_container.classList.remove('show');
 });
+
