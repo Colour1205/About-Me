@@ -538,7 +538,7 @@ body {
     outline: none;
     border: none;
     padding: 6px 13px;
-    background: rgba(0, 0, 0, 0.551);
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(20px);
     display: flex;
     flex-direction: row;
@@ -552,7 +552,7 @@ body {
 
 .buttonv4.scrolled {
     backdrop-filter: none;
-    background: rgb(70, 70, 70);
+    background: rgb(36, 36, 36);
 }
 
 .buttonv4 svg {
