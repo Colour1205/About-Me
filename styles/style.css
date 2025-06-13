@@ -538,7 +538,7 @@ body {
     outline: none;
     border: none;
     padding: 6px 13px;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.551);
     backdrop-filter: blur(20px);
     display: flex;
     flex-direction: row;
