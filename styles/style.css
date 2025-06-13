@@ -3,6 +3,7 @@ body {
     font-family: 'saira', sans-serif;
     justify-content: center;
     display: flex;
+    background: rgb(35, 32, 44);
 }
 
 /* variables */
@@ -17,17 +18,18 @@ body {
 }
 
 .background {
-    background-image: var(--background-image);
-    z-index: -1;
-    background-repeat: no-repeat;
     position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background-position: center;
-    background-size: cover;
-    top: 0;
     left: 0;
+    top: 0;
+    width: 100vw;
+    height: var(--full-height);
+    background-image: var(--background-image);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
 }
+
 
 /* global modal styles */
 
@@ -322,8 +324,9 @@ body {
     padding-top: 15px;
 }
 
+
 .off-screen-section {
-    display: none;
+    display: block;
 }
 
 .off-screen-section.scrolled {
