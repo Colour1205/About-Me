@@ -12,6 +12,8 @@ body {
     --font-color-alt: black;
     --button-background: rgba(255, 255, 255, 0.5);
     --font-weight: normal;
+    --full-height: 100vh;
+    --full-height: 100dvh;
 }
 
 .background {
@@ -304,7 +306,7 @@ body {
     padding: 30px;
     padding-top: 0px;
     border-radius: 35px 35px 0 0;
-    margin-top: calc(100vh - 370px);
+    margin-top: calc(var(--full-height) - 370px);
     transition-property: background, box-shadow, margin-top;
     transition-duration: 0.1s;
     transition-timing-function: ease;
@@ -416,7 +418,7 @@ body {
 }
 
 .widget-scroll-container {
-    max-height: 100vh;
+    max-height: var(--full-height);
     overflow-y: auto;
     scrollbar-width: none;
     overscroll-behavior: contain;
@@ -608,7 +610,7 @@ body {
 
 /* responsive styles */
 
-@media(max-width: 852px) {
+@media(max-width: 882px) {
     .widget-container {
         display: none;
         mask-image: none;
@@ -631,8 +633,8 @@ body {
         transform: translateX(50%);
         min-width: 100vw;
         max-width: 100vw;
-        max-height: 100vh;
-        min-height: 100vh;
+        max-height: var(--full-height);
+        min-height: var(--full-height);
         scrollbar-width: none;
         backdrop-filter: none;
         backdrop-filter: blur(30px);
@@ -660,6 +662,10 @@ body {
 @media(max-width: 620px) {
     #matchatab-modal {
         flex-direction: column;
+    }
+
+    .stock-section {
+        max-width: 90%;
     }
 
     .matchatab.description {
@@ -702,7 +708,7 @@ body {
 
 @media(max-width: 500px) {
     .outer-container {
-        margin-top: calc(100vh - 400px);
+        margin-top: calc(var(--full-height) - 400px);
     }
 
 }
@@ -710,7 +716,7 @@ body {
 @media(max-width: 410px) {
     .outer-container {
         width: 90vw;
-        margin-top: calc(100vh - 430px);
+        margin-top: calc(var(--full-height) - 440px);
         padding: 5px;
     }
 
