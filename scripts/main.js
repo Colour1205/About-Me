@@ -53,12 +53,12 @@ document.querySelectorAll('.modal-close-button').forEach(closeButton => {
 
 // back button logic
 const back_button = document.getElementById('back-button');
+// new: grab the scroll wrapper
+const scrollContainer = document.querySelector('.scroll-container');
+
+// back button: scroll the wrapper
 back_button.addEventListener('click', () => {
-  // Scroll to the top of the page
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
+  scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 /* --- outer container background scroll logic --- */
@@ -73,8 +73,9 @@ const off_screen_section = document.querySelector('.off-screen-section');
 const button_v4 = document.querySelectorAll('.buttonv4');
 const top_button_container = document.querySelector('.top-button-container');
 
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 0) {
+// replace window.scroll listener
+scrollContainer.addEventListener('scroll', () => {
+  if (scrollContainer.scrollTop > 0) {
     header_section.classList.add('scrolled');
     outer_container.classList.add('scrolled');
     social_section.classList.add('scrolled');
