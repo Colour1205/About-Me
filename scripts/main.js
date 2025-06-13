@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     card.innerHTML = `
       <div class="stock-ticker">${stock.label}</div>
-      <div class="stock-price"-</div>
+      <div class="stock-price"></div>
     `;
     stockSection.appendChild(card);
   });
@@ -173,27 +173,31 @@ async function fetchYahooQuote(symbol) {
   }
 }
 
-// Update all stock cards with latest prices from Yahoo
+// Update all stock cards with latest prices from Yahoo (fetch in parallel)
 async function updateStockPricesYahoo() {
-  for (const { symbol, elemId } of STOCK_SYMBOLS) {
-    const priceElem = document.querySelector(`#${elemId} .stock-price`);
-    try {
-      const result = await fetchYahooQuote(symbol);
-      if (result) {
-        const { price, percentChange } = result;
-        let color = percentChange > 0 ? "#3E9D45" : percentChange < 0 ? "#CA5C5C" : "#444";
-        let sign = percentChange > 0 ? "+" : "";
-        priceElem.innerHTML = `<span style="color:${color};">${price.toFixed(2)} <small>(${sign}${percentChange.toFixed(2)}%)</small></span>`;
-      } else {
+  await Promise.all(
+    STOCK_SYMBOLS.map(async ({ symbol, elemId }) => {
+      const priceElem = document.querySelector(`#${elemId} .stock-price`);
+      try {
+        const result = await fetchYahooQuote(symbol);
+        if (result) {
+          const { price, percentChange } = result;
+          let color = percentChange > 0 ? "#3E9D45" : percentChange < 0 ? "#CA5C5C" : "#444";
+          let sign = percentChange > 0 ? "+" : "";
+          priceElem.innerHTML = `<span style="color:${color};">${price.toFixed(2)} <small>(${sign}${percentChange.toFixed(2)}%)</small></span>`;
+        } else {
+          priceElem.textContent = "—";
+        }
+      } catch {
         priceElem.textContent = "—";
       }
-    } catch {
-      priceElem.textContent = "—";
-    }
-  }
+    })
+  );
 }
 
+// Refresh prices every 60 seconds
 setInterval(updateStockPricesYahoo, 60000);
+
 
 /* --- top container logic --- */
 
