@@ -59,8 +59,8 @@ const buttons = document.querySelectorAll('.button');
 const social_section = document.querySelector('.social-section');
 const scroll_up_text = document.getElementById('scroll-up-text');
 const about_me = document.querySelector('.about-me')
-const widget_container = document.querySelector('.widget-container');
 const off_screen_section = document.querySelector('.off-screen-section');
+const button_v4 = document.querySelectorAll('.buttonv4');
 
 window.addEventListener('scroll', () => {
   if (window.scrollY > 0) {
@@ -69,7 +69,6 @@ window.addEventListener('scroll', () => {
     social_section.classList.add('scrolled');
     scroll_up_text.classList.add('scrolled');
     about_me.classList.add('scrolled');
-    widget_container.classList.add('scrolled');
     back_button.classList.add('scrolled');
     off_screen_section.classList.add('scrolled');
 
@@ -82,6 +81,10 @@ window.addEventListener('scroll', () => {
       el.classList.remove('animate-out');
     });
 
+    button_v4.forEach(e1 => {
+      e1.classList.add('scrolled');
+    });
+
     document.documentElement.style.setProperty('--font-color', 'black');
     document.documentElement.style.setProperty('--font-color-alt', 'white');
     document.documentElement.style.setProperty('--button-background', 'rgba(0, 0, 0, 0.65)');
@@ -92,7 +95,6 @@ window.addEventListener('scroll', () => {
     social_section.classList.remove('scrolled');
     scroll_up_text.classList.remove('scrolled');
     about_me.classList.remove('scrolled');
-    widget_container.classList.remove('scrolled');
     back_button.classList.remove('scrolled');
     off_screen_section.classList.remove('scrolled');
 
@@ -103,6 +105,10 @@ window.addEventListener('scroll', () => {
     blur_overshoot.forEach(el => {
       el.classList.remove('animate-in');
       el.classList.add('animate-out');
+    });
+
+    button_v4.forEach(e1 => {
+      e1.classList.remove('scrolled');
     });
 
     document.documentElement.style.setProperty('--font-color', 'white');
@@ -185,3 +191,19 @@ async function updateStockPricesYahoo() {
 }
 
 setInterval(updateStockPricesYahoo, 60000);
+
+/* --- top container logic --- */
+
+//widget button
+const widget_button = document.getElementById('widget-button');
+widget_button.addEventListener('click', () => {
+  const widget_container = document.querySelector('.widget-container');
+  widget_container.classList.toggle('show');
+});
+
+// widget close button
+const widget_close_button = document.getElementById('widget-close-button');
+widget_close_button.addEventListener('click', () => {
+  const widget_container = document.querySelector('.widget-container');
+  widget_container.classList.remove('show');
+});

@@ -234,25 +234,21 @@ body {
 
 .buttonv3 {
     position: absolute;
-    right: 15px;
-    top: 15px;
+    right: 20px;
+    top: 20px;
     height: 40px;
     width: 40px;
     padding: 7px;
     border-radius: 50%;
-    background: rgb(221, 221, 221);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    background: rgb(175, 175, 175);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     border: none;
     transition: all 0.2s ease;
     cursor: pointer;
 }
 
-.buttonv3:hover {
-    background: rgba(160, 160, 160, 0.5);
-}
-
-.buttonv3:focus {
-    background: rgba(78, 78, 78, 0.5);
+.buttonv3 svg {
+    stroke: rgb(54, 54, 54);
 }
 
 /* social section */
@@ -288,8 +284,10 @@ body {
 }
 
 #back-button {
+    position: absolute;
     opacity: 0;
-    margin: 5px;
+    top: 0;
+    right: -15px;
     transition: all 0s 0s;
 }
 
@@ -313,13 +311,13 @@ body {
     position: relative;
     background: rgba(0, 0, 0, 0);
     backdrop-filter: none;
-
 }
 
 .outer-container.scrolled {
     background: rgba(255, 255, 255, 0.45);
     box-shadow: 0 0 50px rgba(149, 149, 149, 0.518);
     backdrop-filter: blur(10px) brightness(1.3) contrast(0.85);
+    padding-top: 15px;
 }
 
 .off-screen-section {
@@ -333,7 +331,7 @@ body {
 
 #scroll-up-text {
     position: absolute;
-    top: -40px;
+    top: -70px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -369,8 +367,13 @@ body {
     padding: 10px 30px;
     border-radius: 17px;
     backdrop-filter: blur(10px);
-    transition: padding 0.3s ease, text-align 0.3s ease, background 0.3s ease, max-height 0.3s ease;
-    margin-top: 30px;
+    transition:
+        padding 0.3s ease,
+        text-align 0.3s ease,
+        background 0.3s ease,
+        max-height 0.3s ease,
+        margin-top 0.2s ease;
+    margin-top: 13px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     max-height: 260px;
     overflow: hidden;
@@ -379,7 +382,8 @@ body {
 .header-section.scrolled {
     background: rgba(0, 0, 0, 0);
     backdrop-filter: none;
-    padding: 5px 0px;
+    padding: 0 0 5px 0;
+    margin-top: 5px;
     box-shadow: none;
     text-align: justify;
     max-height: none;
@@ -407,6 +411,10 @@ body {
     scrollbar-width: none;
 }
 
+#widget-close-button {
+    display: none;
+}
+
 .widget-scroll-container {
     max-height: 100vh;
     overflow-y: auto;
@@ -432,10 +440,6 @@ body {
         backdrop-filter: blur(10px);
     }
 
-    .widget-container.scrolled {
-        filter: blur(10px);
-    }
-
     .stock.card {
         backdrop-filter: none;
     }
@@ -443,11 +447,6 @@ body {
 
 .widget-container::-webkit-scrollbar {
     display: none;
-}
-
-.widget-container.scrolled {
-    transform: scale(0.95);
-    filter: blur(5px);
 }
 
 /* global card styles */
@@ -496,6 +495,50 @@ body {
     color: #ffffff;
     text-wrap: wrap;
     text-align: center;
+}
+
+/* top container styles */
+.top-container {
+    position: sticky;
+    top: 20px;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    height: 40px;
+    z-index: 1;
+}
+
+.buttonv4 {
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    padding: 6px 13px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    gap: 10px;
+    transition: background 0.5s ease;
+    cursor: pointer;
+}
+
+.buttonv4.scrolled {
+    backdrop-filter: none;
+    background: rgb(70, 70, 70);
+}
+
+.buttonv4 svg {
+    fill: white;
+    width: 20px;
+    height: 20px;
+}
+
+#widget-button {
+    visibility: hidden;
 }
 
 /* animation keyframes */
@@ -549,6 +592,49 @@ body {
 @media(max-width: 852px) {
     .widget-container {
         display: none;
+        mask-image: none;
+        backdrop-filter: none;
+    }
+
+    .widget-scroll-container {
+        position: fixed;
+        z-index: 10;
+    }
+
+    .widget-container.show {
+        opacity: 1;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        top: 0;
+        right: 50%;
+        transform: translateX(50%);
+        min-width: 100vw;
+        max-width: 100vw;
+        max-height: 100vh;
+        min-height: 100vh;
+        scrollbar-width: none;
+        backdrop-filter: none;
+        backdrop-filter: blur(30px);
+        overflow: auto;
+    }
+
+    #widget-close-button {
+        display: block;
+        z-index: 1;
+        position: relative;
+        margin-bottom: 30px;
+        right: -40%;
+    }
+
+    .stock-section {
+        justify-content: center;
+        max-width: 70%;
+    }
+
+    #widget-button {
+        visibility: visible;
     }
 }
 
