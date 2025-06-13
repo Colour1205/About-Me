@@ -509,7 +509,7 @@ body {
 
 .top-button-container {
     display: flex;
-    gap: 10px;
+    gap: 7px;
     width: 100%;
     position: relative;
     overflow: auto;
