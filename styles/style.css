@@ -326,7 +326,7 @@ body {
 
 
 .off-screen-section {
-    display: block;
+    display: hidden;
 }
 
 .off-screen-section.scrolled {
