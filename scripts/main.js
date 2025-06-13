@@ -18,28 +18,38 @@ document.querySelectorAll('button[data-target]').forEach(button => {
   });
 });
 
+function closeModal(modal) {
+  if (!modal) return;
+  const modalContainer = modal.closest('.modal-container');
+  modal.classList.remove('show');
+  if (modalContainer) modalContainer.classList.remove('show');
+
+  // Special handling for YouTube modal: reset the iframe src to stop playback
+  if (modal.id === 'youtube-modal') {
+    const iframe = modal.querySelector('iframe');
+    if (iframe) iframe.src = iframe.src; // Reset src to stop playback
+  }
+}
+
 // Close modal on background click
 document.querySelectorAll('.modal-container').forEach(container => {
   container.addEventListener('click', (event) => {
     // Only close if click is directly on the background, not on the modal
     if (event.target === container) {
-      container.classList.remove('show');
-      const innerModal = container.querySelector('.modal');
-      if (innerModal) innerModal.classList.remove('show');
+      closeModal(container.querySelector('.modal.show'));
     }
   });
 });
 
-// close modal on close button click
+// Close modal on close button click
 document.querySelectorAll('.modal-close-button').forEach(closeButton => {
   closeButton.addEventListener('click', (event) => {
-    event.stopPropagation(); // Prevent the click from bubbling up to the container
+    event.stopPropagation(); // Prevent bubbling up
     const modal = closeButton.closest('.modal');
-    const modalContainer = modal.closest('.modal-container');
-    modal.classList.remove('show');
-    modalContainer.classList.remove('show');
+    closeModal(modal);
   });
 });
+
 
 // back button logic
 const back_button = document.getElementById('back-button');
@@ -197,7 +207,6 @@ async function updateStockPricesYahoo() {
 
 // Refresh prices every 60 seconds
 setInterval(updateStockPricesYahoo, 60000);
-
 
 /* --- top container logic --- */
 
