@@ -503,9 +503,29 @@ body {
     top: 20px;
     width: 100%;
     display: flex;
-    gap: 10px;
     height: 40px;
     z-index: 1;
+}
+
+.top-button-container {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    position: relative;
+    overflow: auto;
+    scrollbar-width: none;
+    overscroll-behavior: contain;
+    transition: all 0.3s ease;
+}
+
+.top-button-container::-webkit-scrollbar {
+    display: none;
+}
+
+.top-button-container.scrolled {
+    margin-right: 40px;
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    padding-right: 40px;
 }
 
 .buttonv4 {
@@ -515,7 +535,6 @@ body {
     padding: 6px 13px;
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -693,12 +712,14 @@ body {
         width: 90vw;
         margin-top: calc(100vh - 430px);
         padding: 5px;
-        padding-top: 0px;
     }
 
     .outer-container.scrolled {
         padding: 15px;
-        padding-top: 0px;
+    }
+
+    #back-button {
+        right: 0;
     }
 
     #matchatab-modal {
