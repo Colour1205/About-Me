@@ -311,13 +311,14 @@ iframe {
 
 #back-button {
     position: absolute;
+    display: none;
     opacity: 0;
     top: 0;
     right: -15px;
-    transition: all 0s 0s;
 }
 
 #back-button.scrolled {
+    display: block;
     opacity: 1;
     transition: all 0.5s 0.3s;
 }
