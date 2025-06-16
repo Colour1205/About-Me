@@ -1,0 +1,154 @@
+:root {
+    --box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    --backdrop-blur: blur(10px);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+
+.top-container {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: var(--backdrop-blur);
+    height: 46px;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 7px;
+    z-index: 1;
+    border-bottom: 1.5px solid #505050;
+}
+
+.course-container {
+    position: relative;
+    width: 100px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.module-container {
+    width: 150px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    position: relative;
+    border-left: 1.5px solid #505050;
+}
+
+.notes-container {
+    height: 100%;
+    width: calc(100vw - 200px - 300px);
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    overflow: hidden;
+}
+
+.panel {
+    padding: 70px 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: hidden;
+    gap: 4px;
+    width: 100%;
+    height: 100%;
+    box-sizing: fit-content;
+}
+
+.panel::-webkit-scrollbar {
+    display: none;
+}
+
+.notes.panel {
+    border-left: 1.5px solid #505050;
+    width: 450px;
+}
+
+#viewer-panel {
+    box-shadow: none;
+    border: none;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    padding: 46px 0px 0 0px;
+    border-left: 1.5px solid #505050;
+    display: flex;
+    align-items: center;
+}
+
+#viewer-panel audio {
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+}
+
+#viewer-panel pre {
+    color: #272421;
+    padding: 26px 25px 25px 25px;
+    font-family: 'IBM Plex Mono', 'Consolas', monospace;
+    font-size: 1.04rem;
+    margin: 0;
+    white-space: pre-wrap;
+    display: block;
+    width: 100%;
+    position: relative;
+}
+
+#viewer-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+
+#viewer-panel p {
+    padding: 25px;
+    font-size: 1.04rem;
+}
+
+#viewer-panel iframe {
+    border: none;
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+.card {
+    width: 100%;
+    min-height: 40px;
+    outline: 1px solid #505050;
+    border: none;
+    cursor: pointer;
+    background: rgba(28, 28, 28, 0);
+    color: black;
+    border-radius: 20px;
+}
