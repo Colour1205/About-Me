@@ -37,12 +37,9 @@ async function viewNote(course, module, note) {
             if (!response.ok) throw new Error();
             const text = await response.text();
             viewer_panel.innerHTML = `<pre>${escapeHtml(text)}</pre>`;
-        } else if (['pdf'].includes(ext)) {
-            // PDF: show with iframe
-            viewer_panel.innerHTML = `<iframe src="${PATH}"></iframe>`;
-        } else if (['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg'].includes(ext)) {
-            // Images
-            viewer_panel.innerHTML = `<img src="${PATH}" alt="${note}">`;
+        } else if (['pdf', 'ppt', 'pptx', 'doc', 'xls', 'xlsx', 'docx', 'png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'svg'].includes(ext)) {
+            // PDF and images
+            viewer_panel.innerHTML = `<iframe src="../public/file-viewer/index.html?fileUrl=${PATH}" scrolling="auto"></iframe>`;
         } else if (['mp3', 'wav', 'ogg', 'flac'].includes(ext)) {
             // Audio
             viewer_panel.innerHTML = `<audio controls src="${PATH}"></audio>`;
@@ -75,9 +72,17 @@ function escapeHtml(unsafe) {
 
 // helper that returns file extension
 function getFileExtension(filename) {
-    return filename.split('.').pop().toLowerCase();
+    const lastDot = filename.lastIndexOf('.');
+    if (lastDot == -1) return '';
+    return filename.substring(lastDot + 1);
 }
 
+// helper to remove file extension
+function removeFileExtension(filename) {
+    const lastDot = filename.lastIndexOf('.');
+    if (lastDot == -1) return filename // doesn't have extension
+    return filename.substring(0, lastDot);
+}
 
 async function displayNotes() {
     let note_list = await listNotes();
@@ -86,7 +91,7 @@ async function displayNotes() {
     course_panel.innerHTML = '';
     if (note_list && Object.keys(note_list).length > 0) {
         for (const COURSE in note_list) {
-            course_panel.innerHTML += `<button class="card" course-id="${COURSE}">${COURSE}</button>`;
+            course_panel.innerHTML += `<button class="card vertical-text course" course-id="${COURSE}">${COURSE}</button>`;
         }
     }
 
@@ -94,6 +99,9 @@ async function displayNotes() {
     const course_buttons = course_panel.querySelectorAll('button[course-id]');
     course_buttons.forEach(course_btn => {
         course_btn.addEventListener('click', () => {
+            course_buttons.forEach(b => b.classList.remove('active'));
+            course_btn.classList.add('active');
+
             const course_name = course_btn.getAttribute('course-id');
             const module_panel = document.getElementById('module-panel');
             const notes_panel = document.getElementById('notes-panel');
@@ -104,25 +112,31 @@ async function displayNotes() {
             const modules = note_list[course_name];
 
             for (const MODULE in modules) {
-                module_panel.innerHTML += `<button class="card" module-id="${MODULE}">${MODULE}</button>`;
+                module_panel.innerHTML += `<button class="card module" module-id="${MODULE}">${MODULE}</button>`;
             }
 
             // add all module event listener
             const module_buttons = module_panel.querySelectorAll('button[module-id]');
             module_buttons.forEach(module_btn => {
                 module_btn.addEventListener('click', () => {
+                    module_buttons.forEach(b => b.classList.remove('active'));
+                    module_btn.classList.add('active');
+
                     const module_name = module_btn.getAttribute('module-id');
                     notes_panel.innerHTML = '' //reset notes panel
                     const notes = modules[module_name];
 
                     for (const NOTE of notes) {
-                        notes_panel.innerHTML += `<button class="card" note-id="${NOTE}">${NOTE}</button>`;
+                        notes_panel.innerHTML += `<button class="card note" note-id="${NOTE}">${NOTE}</button>`;
                     }
 
                     // add all note event listener
                     const note_buttons = notes_panel.querySelectorAll('button[note-id]');
                     note_buttons.forEach(note_btn => {
                         note_btn.addEventListener('click', () => {
+                            note_buttons.forEach(b => b.classList.remove('active'));
+                            note_btn.classList.add('active');
+
                             const note_name = note_btn.getAttribute('note-id');
                             viewNote(course_name, module_name, note_name);
                         })
@@ -130,9 +144,43 @@ async function displayNotes() {
                 })
             })
 
+            // simulate click of first module
+            const first_module = document.querySelector('button[module-id]');
+
+            if (first_module) {
+                first_module.click();
+                const first_note = document.querySelector('button[note-id]');
+
+                // simulate click of first note
+                if (first_note) {
+                    first_note.click();
+                }
+            }
+
 
         })
     })
+
+    // display the initial view
+    const first_course = document.querySelector('button[course-id]');
+
+    if (first_course) {
+        first_course.click();
+
+        const first_module = document.querySelector('button[module-id]');
+
+        if (first_module) {
+            first_module.click();
+
+            const first_note = document.querySelector('button[note-id]');
+
+            if (first_note) {
+                first_note.click();
+            }
+        }
+    }
+
+
 }
 
 displayNotes(); // display note on initial load

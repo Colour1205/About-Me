@@ -8,28 +8,21 @@
     <link rel="stylesheet" href="../styles/notes.css">
     <link rel="icon" href="../assets/images/notes-favicon.png" type="image/x-icon" style="border-radius: 25px;">
     <meta name="theme-color" content="#23202C">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 </head>
 
 <body>
     <div class="top-container">top bar
     </div>
     <div class="course-container">
-        <div class="course panel" id="course-panel">
-            <button class="card">course list will be here</button>
-        </div>
+        <div class="course panel" id="course-panel"></div>
     </div>
     <div class="module-container">
-        <div class="module panel" id="module-panel">
-            <button class="card">course module will be here</button>
-        </div>
+        <div class="module panel" id="module-panel"></div>
     </div>
     <div class="notes-container">
-        <div class="notes panel" id="notes-panel">
-            <button class="card">note 1</button>
-        </div>
-        <div class="viewer panel" id="viewer-panel">
-            note viewer
-        </div>
+        <div class="notes panel" id="notes-panel"></div>
+        <div class="viewer panel" id="viewer-panel"></div>
     </div>
 
     <script src="../scripts/notes.js"></script>
