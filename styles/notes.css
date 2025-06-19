@@ -34,9 +34,38 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    padding: 7px;
+    padding: 7px 10px;
     z-index: 1;
     border-bottom: 1.5px solid #505050;
+    display: flex;
+    align-items: center;
+}
+
+.buttonv1 {
+    border: 1.5px solid #505050;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.top-container svg {
+    width: 20px;
+    height: 20px;
+    fill: black;
+}
+
+#show-course-button {
+    display: none;
+}
+
+#show-course-button.active {
+    background: #505050;
 }
 
 .course-container {
@@ -60,11 +89,11 @@ body {
 
 .notes-container {
     height: 100%;
-    width: calc(100vw - 150px - 60px);
     display: flex;
     flex-direction: row;
     position: relative;
     overflow: hidden;
+    flex: 1;
 }
 
 .panel {
@@ -88,7 +117,8 @@ body {
 
 .notes.panel {
     border-left: 1.5px solid #505050;
-    width: 450px;
+    max-width: 250px;
+    width: 70%;
 }
 
 #viewer-panel {
@@ -172,4 +202,50 @@ body {
 .vertical-text {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
+}
+
+
+
+/* responsive adjustments */
+@media (max-width: 735px) {
+    #show-course-button {
+        display: flex;
+    }
+
+    .course-container {
+        display: none;
+    }
+
+    .course-container.active {
+        display: flex;
+        position: fixed;
+        width: 100%;
+        top: 46px;
+        backdrop-filter: blur(20px);
+        z-index: 2;
+    }
+
+    .vertical-text {
+        writing-mode: horizontal-tb;
+        transform: none;
+    }
+
+    .module-container {
+        width: 100px;
+    }
+
+    .notes.panel {
+        width: 60%;
+    }
+}
+
+@media (max-width: 608px) {
+    #viewer-panel {
+        display: none;
+    }
+
+    .notes.panel {
+        width: 100%;
+        max-width: none;
+    }
 }

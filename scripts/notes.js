@@ -84,6 +84,14 @@ function removeFileExtension(filename) {
     return filename.substring(0, lastDot);
 }
 
+/* show course button logic */
+const show_course_button = document.getElementById('show-course-button');
+show_course_button.addEventListener('click', () => {
+    show_course_button.classList.toggle('active');
+    const course_container = document.querySelector('.course-container');
+    course_container.classList.toggle('active');
+})
+
 async function displayNotes() {
     let note_list = await listNotes();
 
@@ -101,6 +109,9 @@ async function displayNotes() {
         course_btn.addEventListener('click', () => {
             course_buttons.forEach(b => b.classList.remove('active'));
             course_btn.classList.add('active');
+            const course_container = document.querySelector('.course-container');
+            if (course_container) course_container.classList.remove('active');
+            show_course_button.classList.remove('active');
 
             const course_name = course_btn.getAttribute('course-id');
             const module_panel = document.getElementById('module-panel');
@@ -151,8 +162,8 @@ async function displayNotes() {
                 first_module.click();
                 const first_note = document.querySelector('button[note-id]');
 
-                // simulate click of first note
-                if (first_note) {
+                // simulate click of first note and not on small screens
+                if (first_note && window.innerWidth > 735) {
                     first_note.click();
                 }
             }
@@ -184,3 +195,4 @@ async function displayNotes() {
 }
 
 displayNotes(); // display note on initial load
+
