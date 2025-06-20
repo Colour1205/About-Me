@@ -24,10 +24,10 @@ async function listNotes() {
         console.error('Error listing notes:', error);
     }
 }
+const viewer_panel = document.getElementById('viewer-panel');
 
 async function viewNote(course, module, note) {
     const PATH = `${NOTE_SERVER_ADDRESS}/notes/${encodeURIComponent(course)}/${encodeURIComponent(module)}/${encodeURIComponent(note)}`;
-    const viewer_panel = document.getElementById('viewer-panel');
     const ext = getFileExtension(note);
 
     try {
@@ -148,6 +148,11 @@ async function displayNotes() {
                             note_buttons.forEach(b => b.classList.remove('active'));
                             note_btn.classList.add('active');
 
+                            // set viewer panel to active
+                            if (window.innerWidth <= 608) {
+                                viewer_panel.classList.add('active');
+                            }
+
                             const note_name = note_btn.getAttribute('note-id');
                             viewNote(course_name, module_name, note_name);
                         })
@@ -167,8 +172,6 @@ async function displayNotes() {
                     first_note.click();
                 }
             }
-
-
         })
     })
 
@@ -185,14 +188,26 @@ async function displayNotes() {
 
             const first_note = document.querySelector('button[note-id]');
 
-            if (first_note) {
+            // simulate click of first note and not on small screens
+            if (first_note && window.innerWidth > 735) {
                 first_note.click();
             }
         }
     }
-
-
 }
 
 displayNotes(); // display note on initial load
+
+function reset_note_buttons() {
+    const note_buttons = document.querySelectorAll('button[note-id]');
+    note_buttons.forEach(b => b.classList.remove('active'));
+}
+
+/* viewer close button */
+const close_viewer_button = document.getElementById('close-viewer-button');
+close_viewer_button.addEventListener('click', () => {
+    viewer_panel.classList.remove('active');
+    // reset all active state of buttons
+    reset_note_buttons();
+})
 
