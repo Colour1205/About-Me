@@ -53,7 +53,6 @@ document.querySelectorAll('.modal-close-button').forEach(closeButton => {
 
 // back button logic
 const back_button = document.getElementById('back-button');
-// new: grab the scroll wrapper
 const scrollContainer = document.querySelector('.scroll-container');
 
 // back button: scroll the wrapper
