@@ -11,7 +11,7 @@ fetch('http://192.168.1.45:5000/api/notes')
         console.error("Fetch error:", error);
     });
 
-const NOTE_SERVER_ADDRESS = 'http://192.168.1.45:5000';
+const NOTE_SERVER_ADDRESS = 'http://192.168.1.63:5000';
 
 async function listNotes() {
     try {
